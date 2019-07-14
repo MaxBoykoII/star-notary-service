@@ -1,0 +1,1 @@
+export { ValidationController } from './validation';
