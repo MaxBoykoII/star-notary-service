@@ -1,0 +1,3 @@
+class MempoolRequest {
+    constructor() {}
+}

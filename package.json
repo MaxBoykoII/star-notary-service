@@ -1,0 +1,35 @@
+{
+  "name": "star-notary-service",
+  "version": "1.0.0",
+  "description": "A star registry service that allows users to claim ownership of their favorite star in the night skey",
+  "main": "./www main.js",
+  "scripts": {
+    "start": "tsc && node www/main.js",
+    "dev": "ts-node-dev --respawn --transpileOnly ./src/main.ts"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MaxBoykoII/star-notary-service.git"
+  },
+  "keywords": [
+    "Blockchain",
+    "Bitcoin",
+    "express"
+  ],
+  "author": "Max Boyko <maxboykomax@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/MaxBoykoII/star-notary-service/issues"
+  },
+  "homepage": "https://github.com/MaxBoykoII/star-notary-service#readme",
+  "devDependencies": {
+    "@types/body-parser": "^1.17.0",
+    "@types/express": "^4.17.0",
+    "ts-node-dev": "^1.0.0-pre.40",
+    "typescript": "^3.5.3"
+  },
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1"
+  }
+}
