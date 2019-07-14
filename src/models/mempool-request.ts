@@ -2,10 +2,10 @@ export class MempoolRequest {
     constructor(public address: string, public timestamp: number, public window: number) {
         if (!address)
             throw new Error('Wallet address cannot be null or the empty string!');
-        if(!timestamp)
+        if (!timestamp)
             throw new Error('Timestamp must be a number!');
-        
-        if(!window)
+
+        if (!window)
             throw new Error('Validation must be a number!');
     }
 
@@ -18,6 +18,9 @@ export class MempoolRequest {
     }
 
     private getTimeRemaining(): number {
-        return this.window;
+        const now = +Date.now();
+        const expiration = this.timestamp + this.window;
+
+        return Math.floor((expiration - now) / 1000);
     }
 }
