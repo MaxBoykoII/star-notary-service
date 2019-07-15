@@ -1,5 +1,10 @@
+const bitcoinMessage = require('bitcoinjs-message');
+
 export class MempoolRequest {
-    constructor(public address: string, public timestamp: number, public window: number) {
+    constructor(public readonly address: string,
+        public readonly timestamp: number,
+        public readonly window: number,
+        public readonly isValid = false) {
         if (!address)
             throw new Error('Wallet address cannot be null or the empty string!');
         if (!timestamp)
@@ -10,11 +15,42 @@ export class MempoolRequest {
     }
 
     toJSON() {
-        return {
-            walletAddress: this.address,
-            requestTimeStamp: this.timestamp.toString(),
-            validationWindow: this.getTimeRemaining()
-        };
+        return this.isValid ? {
+            registerStar: true,
+            status: {
+                address: this.address,
+                requestTimeStamp: this.timestamp,
+                message: this.getMessage(),
+                validationWindow: this.getTimeRemaining(),
+                messageSignature: false
+            }
+        } :
+            {
+                walletAddress: this.address,
+                requestTimeStamp: this.timestamp.toString(),
+                validationWindow: this.getTimeRemaining(),
+                message: this.getMessage()
+            };
+    }
+
+    testSignature(signature: string): boolean {
+        try {
+            return bitcoinMessage.verify(this.getMessage(), this.address, signature);
+        }
+        catch {
+            return false;
+        }
+    }
+
+    markAsValid(window: number): MempoolRequest {
+        const { address, timestamp } = this;
+        const timeElapsed = +Date.now() - this.timestamp;
+
+        return new MempoolRequest(address, timestamp, window + timeElapsed, true);
+    }
+
+    private getMessage() {
+        return `${this.address}:${this.timestamp}:starRegistry`;
     }
 
     private getTimeRemaining(): number {

@@ -1,0 +1,1 @@
+export { validateReqBody } from './validate-req-body';

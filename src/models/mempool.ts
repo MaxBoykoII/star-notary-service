@@ -31,4 +31,24 @@ export class Mempool {
         }
     }
 
+    testSignature(address: string, signature: string): boolean {
+        if (!this.has(address))
+            return false;
+
+        return this.retrieve(address).testSignature(signature);
+    }
+
+    isValid(address: string): boolean {
+        return this.has(address) && this.retrieve(address).isValid;
+    }
+
+    markAsValid(address: string, window: number): void {
+        if(this.has(address)) {
+          const old = this.retrieve(address);
+          const validated = old.markAsValid(window);
+
+          this.remove(address);
+          this.add(validated);
+        }
+    }
 }
