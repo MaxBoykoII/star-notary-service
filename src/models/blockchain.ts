@@ -95,6 +95,8 @@ export class Blockchain {
 
         return errors;
     }
-}
 
-module.exports.Blockchain = Blockchain;
+    searchBlocks(searchFn: (block: any) => boolean) {
+        return this.bd.searchBlocks(searchFn).then(matches => matches.map(m => JSON.parse(m)));
+    }
+}

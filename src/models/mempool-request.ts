@@ -22,7 +22,7 @@ export class MempoolRequest {
                 requestTimeStamp: this.timestamp,
                 message: this.getMessage(),
                 validationWindow: this.getTimeRemaining(),
-                messageSignature: false
+                messageSignature: true
             }
         } :
             {

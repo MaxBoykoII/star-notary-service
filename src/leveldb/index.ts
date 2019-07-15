@@ -30,5 +30,17 @@ export class LevelSandbox {
                 .on('end', () => resolve(count)));
     }
 
+    searchBlocks(searchFn: (block: any) => boolean): Promise<string[]> {
+        let matches: string[] = [];
+        
+        return new Promise((resolve, reject) =>
+            this.db.createReadStream()
+                .on('data', (data: any) => {
+                    searchFn(JSON.parse(data.value)) && matches.push(data.value)
+                })
+                .on('error', (err: Error) => reject(err))
+                .on('end', () => resolve(matches)));
+    }
+
 
 }
