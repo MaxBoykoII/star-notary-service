@@ -1,0 +1,167 @@
+{
+	"info": {
+		"_postman_id": "1591156a-aff6-49a7-a91d-7882e3944397",
+		"name": "Star Notary Service",
+		"description": "A simple api for claiming ownership of stars in the night sky.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "requestValidation",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"walletAddress\": \"15bxD1g8Ks6bBxFHUoeF9fkjsph9Ho46fY\"\n}"
+				},
+				"url": {
+					"raw": "localhost:8000/requestValidation",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"requestValidation"
+					],
+					"query": [
+						{
+							"key": "",
+							"value": ""
+						}
+					]
+				},
+				"description": "Send validation request with a bitcoin wallet address."
+			},
+			"response": []
+		},
+		{
+			"name": "/message-signature/validate",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"address\": \"15bxD1g8Ks6bBxFHUoeF9fkjsph9Ho46fY\", \"signature\": \"IHkQjAJscYqkhtvdyQ9r7Ch8hSEcFFIu7A2mdubwX/UvMgTlFiHQJZ5R/BWIeWdMcUtSjWSBJHcsf/dGapSzfd4=\"}"
+				},
+				"url": {
+					"raw": "localhost:8000/message-signature/validate",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"message-signature",
+						"validate"
+					]
+				},
+				"description": "Validate signature"
+			},
+			"response": []
+		},
+		{
+			"name": "/block",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"address\": \"15bxD1g8Ks6bBxFHUoeF9fkjsph9Ho46fY\",\r\n    \"star\": {\r\n                \"dec\": \"78° 32' 33.9\",\r\n                \"ra\": \"13h 39m 6.0s\",\r\n                \"story\": \"Planet will forever hold dominion over all other bulls...\"\r\n            }\r\n}"
+				},
+				"url": {
+					"raw": "localhost:8000/block",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"block"
+					]
+				},
+				"description": "Endpoint for registering a star"
+			},
+			"response": []
+		},
+		{
+			"name": "/block",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8000/block/4",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"block",
+						"4"
+					]
+				},
+				"description": "Get block at specified height"
+			},
+			"response": []
+		},
+		{
+			"name": "/starts/hash:hash",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8000/stars/hash44bba1d70b830eb6126e37c28159450a9db4f45118608f57ed05050a19c3fe98",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"stars",
+						"hash44bba1d70b830eb6126e37c28159450a9db4f45118608f57ed05050a19c3fe98"
+					]
+				},
+				"description": "Find a star by its hash value."
+			},
+			"response": []
+		},
+		{
+			"name": "/stars/address:address",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8000/stars/address15bxD1g8Ks6bBxFHUoeF9fkjsph9Ho46fY",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"stars",
+						"address15bxD1g8Ks6bBxFHUoeF9fkjsph9Ho46fY"
+					]
+				},
+				"description": "Find all stars that correspond to a given address."
+			},
+			"response": []
+		}
+	]
+}
