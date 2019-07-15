@@ -7,9 +7,8 @@ const TIMEOUT_VALID_REQUEST_WINDOW = 30 * 60 * 1000;
 
 export class ValidationController {
     router = express.Router();
-    private mempool = new Mempool();
 
-    constructor() {
+    constructor(private mempool: Mempool) {
         this.requestValidation()
             .validateSignature();
     }
